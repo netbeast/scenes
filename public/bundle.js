@@ -73,13 +73,13 @@ var Picker = function (_React$Component) {
           { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'good-morning') },
           'Good Morning'
         ),
-        '  ',
+        ' ',
         _react2.default.createElement(
           'button',
           { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'film') },
           'Watching a Film'
         ),
-        '  ',
+        ' ',
         _react2.default.createElement(
           'button',
           { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'party') },

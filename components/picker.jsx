@@ -20,9 +20,9 @@ export default class Picker extends React.Component {
       <div className='text-center'>
         <br/><br/>
         <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'good-morning') }>Good Morning</button>
-        &nbsp;&nbsp;
+        &nbsp;
         <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'film') }>Watching a Film</button>
-        &nbsp;&nbsp;
+        &nbsp;
         <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'party') }>Party</button>
         <br/>
       </div>
