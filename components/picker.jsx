@@ -12,14 +12,19 @@ export default class Picker extends React.Component {
   }
 
   handleClick () {
+
   }
 
   render () {
     return (
-      <div>
-        <button onClick={ this.handleClick.bind(this, 'good-morning') }>Good Morning</button>
-        <button onClick={ this.handleClick.bind(this, 'film') }>Watching a Film</button>
-        <button onClick={ this.handleClick.bind(this, 'party') }>Party</button>
+      <div className='text-center'>
+        <br/><br/>
+        <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'good-morning') }>Good Morning</button>
+        &nbsp;&nbsp;
+        <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'film') }>Watching a Film</button>
+        &nbsp;&nbsp;
+        <button className='btn btn-filled btn-primary' onClick={ this.handleClick.bind(this, 'party') }>Party</button>
+        <br/>
       </div>
     )
   }
