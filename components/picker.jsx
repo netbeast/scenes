@@ -5,23 +5,39 @@ import netbeast from 'netbeast'
 export default class Picker extends React.Component {
 
   handleMorning () {
-    // 
-    // netbeast('music').set({volume: 15, track: __dirname + '/media/morningsong.mp3'})
-    // .then(function (data) {
-    //   console.log(data)
-    // }).catch(function (err) {
-    //   console.log('ERR')
-    //   console.log(err)
-    // })
-    //
-    var i = 0
-    var timer = setInterval(function () {
-      if (i >= 0 && i <= 25) {
-        netbeast('lights').set({color: {r: 10 * i, g: 10 * i, b: 10 * i}})
-        i++
-      } else clearInterval(timer)
-    }, 400)
+    netbeast('lights').set({power: 0})
+    netbeast('switch').set({power: false})
+    netbeast('music').set({status: 'stop'})
+    netbeast('music').set({track: 'http://192.168.0.14:8000/i/scenes/media/morningsong.mp3', volume: 10})
 
+    var j = 0
+    // var timerMusic = setInterval(function () {
+    //   if (j >= 0 && j <= 10) {
+    //     netbeast('music').set({volume: 30 + j * 5})
+    //     j++
+    //   } else clearInterval(timerMusic)
+    // }, 1000)
+
+    setTimeout(function () {
+      var i = 0
+      var timerLights = setInterval(function () {
+        if (i >= 0 && i <= 25) {
+          netbeast('lights').set({power: true, color: {r: 10 * i, g: 10 * i, b: 10 * i}})
+          i++
+        } else clearInterval(timerLights)
+      }, 400)
+      netbeast('switch').set({power: true})
+      .then(function (data) {
+        console.log(data)
+      }).catch(function (err) {
+        console.log(err)
+      })
+    }, 8000)
+
+    setTimeout(function () {
+      console.log('chromecasting')
+      netbeast('video').set({track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 1})
+    }, 15000)
   }
 
   handleFilm () {
