@@ -6017,3 +6017,10 @@ em {
 */
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+.scene-btns {
+  position: fixed;
+  width: 100%;
+  bottom: 50px;
+}

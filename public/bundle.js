@@ -36,6 +36,8 @@ var _netbeast2 = _interopRequireDefault(_netbeast);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -51,41 +53,90 @@ var Picker = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Picker).call(this));
 
     _this.state = {
-      color: '#fff',
-      power: false
+      scene: ''
     };
     return _this;
   }
 
   _createClass(Picker, [{
     key: 'handleClick',
-    value: function handleClick() {}
+    value: function handleClick(scene) {
+      this.setState({ scene: scene });
+    }
+  }, {
+    key: 'renderMovie',
+    value: function renderMovie() {
+      return _react2.default.createElement(
+        'video',
+        _defineProperty({ controls: true, autoPlay: true, width: '100%', height: '450px' }, 'controls', true),
+        _react2.default.createElement('source', { src: 'media/countdown.mp4', type: 'video/mp4' }),
+        'Your browser does not support the video tag.'
+      );
+    }
+  }, {
+    key: 'renderMorning',
+    value: function renderMorning() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'morning' },
+        _react2.default.createElement('img', { src: 'media/Alarm-Clock.jpg.jpg', width: '100%', height: '450px', alt: 'morning-photo' })
+      );
+    }
+  }, {
+    key: 'renderSaving',
+    value: function renderSaving() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'saving text-center' },
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'h1',
+          { style: { color: 'white' } },
+          'Energy saving mode: ',
+          _react2.default.createElement('br', null),
+          ' ON'
+        )
+      );
+    }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'text-center' },
+        { ref: 'container', className: 'container', style: containerStyle },
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
+        this.state.scene === 'movie' ? this.renderMovie() : null,
+        this.state.scene === 'morning' ? this.renderMorning() : null,
+        this.state.scene === 'saving' ? this.renderSaving() : null,
         _react2.default.createElement(
-          'button',
-          { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'good-morning') },
-          'Good Morning'
-        ),
-        ' ',
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'film') },
-          'Watching a Film'
-        ),
-        ' ',
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-filled btn-primary', onClick: this.handleClick.bind(this, 'party') },
-          'Party'
-        ),
-        _react2.default.createElement('br', null)
+          'div',
+          { className: 'scene-btns text-center' },
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn btn-filled btn-lg btn-primary', onClick: this.handleClick.bind(this, 'morning') },
+            'Good Morning'
+          ),
+          '    ',
+          _react2.default.createElement(
+            'button',
+            { className: 'btn btn-filled btn-lg btn-primary', onClick: this.handleClick.bind(this, 'movie') },
+            'Movie'
+          ),
+          '    ',
+          _react2.default.createElement(
+            'button',
+            { className: 'btn btn-filled btn-lg btn-primary', onClick: this.handleClick.bind(this, 'saving') },
+            'Saving mode'
+          ),
+          _react2.default.createElement('br', null)
+        )
       );
     }
   }]);
@@ -94,6 +145,13 @@ var Picker = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Picker;
+
+
+var containerStyle = {
+  height: '100%',
+  width: '100%',
+  display: 'block'
+};
 
 },{"netbeast":38,"react":268}],3:[function(require,module,exports){
 (function (process,global){
