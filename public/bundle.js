@@ -18,6 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(_picker2.default, null), document.getElementById('app'));
 
 },{"./picker.jsx":2,"react":268,"react-dom":112}],2:[function(require,module,exports){
+(function (process){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42,6 +43,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+process.env.NETBEAST = '192.168.0.14:8000';
+
+
+var timerMusic;
+var timerLights;
+var timer1;
+var timer2;
+var timer3;
+var timer4;
+var timer5;
+
 var Picker = function (_React$Component) {
   _inherits(Picker, _React$Component);
 
@@ -54,38 +66,50 @@ var Picker = function (_React$Component) {
   _createClass(Picker, [{
     key: 'handleMorning',
     value: function handleMorning() {
+      this.closeTimers();
+      (0, _netbeast2.default)('music').set({ status: 'stop' });
       (0, _netbeast2.default)('lights').set({ power: 0 });
       (0, _netbeast2.default)('switch').set({ power: false });
-      (0, _netbeast2.default)('music').set({ status: 'stop' });
+      (0, _netbeast2.default)('video').set({ status: 'stop' });
       (0, _netbeast2.default)('music').set({ track: 'http://192.168.0.14:8000/i/scenes/media/morningsong.mp3', volume: 10 });
 
       var j = 0;
-      // var timerMusic = setInterval(function () {
-      //   if (j >= 0 && j <= 10) {
-      //     netbeast('music').set({volume: 30 + j * 5})
-      //     j++
-      //   } else clearInterval(timerMusic)
-      // }, 1000)
+      timerMusic = setInterval(function () {
+        if (j >= 0 && j <= 10) {
+          (0, _netbeast2.default)('music').set({ volume: 10 + j * 1 });
+          j++;
+        } else clearInterval(timerMusic);
+      }, 1000);
 
-      setTimeout(function () {
+      timer1 = setTimeout(function () {
         var i = 0;
-        var timerLights = setInterval(function () {
+        timerLights = setInterval(function () {
           if (i >= 0 && i <= 25) {
             (0, _netbeast2.default)('lights').set({ power: true, color: { r: 10 * i, g: 10 * i, b: 10 * i } });
             i++;
           } else clearInterval(timerLights);
         }, 400);
-        (0, _netbeast2.default)('switch').set({ power: true }).then(function (data) {
-          console.log(data);
-        }).catch(function (err) {
-          console.log(err);
-        });
+        (0, _netbeast2.default)('switch').set({ power: true });
       }, 8000);
 
-      setTimeout(function () {
-        console.log('chromecasting');
-        (0, _netbeast2.default)('video').set({ track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 1 });
-      }, 15000);
+      timer2 = setTimeout(function () {
+        (0, _netbeast2.default)('video').set({ track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 100 });
+      }, 13000);
+
+      timer3 = setTimeout(function () {
+        (0, _netbeast2.default)().info('Your plant needs water ', 'Flower Power');
+        (0, _netbeast2.default)('lights').set({ color: { r: 252, g: 252, b: 255 } });
+        timer4 = setTimeout(function () {
+          (0, _netbeast2.default)('lights').set({ color: { r: 255, g: 255, b: 255 } });
+        }, 2000);
+      }, 25000);
+
+      timer5 = setTimeout(function () {
+        (0, _netbeast2.default)('lights').set({ power: 0 });
+        (0, _netbeast2.default)('switch').set({ power: false });
+        (0, _netbeast2.default)('music').set({ status: 'stop' });
+        (0, _netbeast2.default)('video').set({ status: 'stop' });
+      }, 80000);
     }
   }, {
     key: 'handleFilm',
@@ -93,6 +117,18 @@ var Picker = function (_React$Component) {
   }, {
     key: 'handleParty',
     value: function handleParty() {}
+  }, {
+    key: 'closeTimers',
+    value: function closeTimers() {
+      console.log(timerMusic);
+      if (timerMusic) clearInterval(timerMusic);
+      if (timerLights) clearInterval(timerLights);
+      if (timer1) clearTimeout(timer1);
+      if (timer2) clearTimeout(timer2);
+      if (timer3) clearTimeout(timer3);
+      if (timer4) clearTimeout(timer4);
+      if (timer5) clearTimeout(timer5);
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -123,7 +159,9 @@ var Picker = function (_React$Component) {
 
 exports.default = Picker;
 
-},{"netbeast":38,"react":268}],3:[function(require,module,exports){
+}).call(this,require('_process'))
+
+},{"_process":14,"netbeast":38,"react":268}],3:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
