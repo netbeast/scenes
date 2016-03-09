@@ -14,6 +14,8 @@ var app = express()
 
 app.use(express.static('public'))
 
+app.use('/media', express.static('media'))
+
 var server = http.createServer(app)
 server.listen(cmd.port || 4000, function () {
   console.log('http server started on %s:%s',
