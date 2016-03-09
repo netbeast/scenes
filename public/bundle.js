@@ -31,6 +31,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _superagentBluebirdPromise = require('superagent-bluebird-promise');
+
+var _superagentBluebirdPromise2 = _interopRequireDefault(_superagentBluebirdPromise);
+
 var _netbeast = require('netbeast');
 
 var _netbeast2 = _interopRequireDefault(_netbeast);
@@ -67,7 +71,9 @@ var Picker = function (_React$Component) {
     key: 'handleMorning',
     value: function handleMorning() {
       this.closeTimers();
+      var clock = { power: 'on', data: [[0, 0, 1, 1, 1, 1, 0, 0], [0, 1, 0, 0, 0, 0, 1, 0], [1, 0, 0, 1, 0, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 1], [1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1, 0], [0, 0, 1, 1, 1, 1, 0, 0]] };
       (0, _netbeast2.default)('music').set({ status: 'stop' });
+      _superagentBluebirdPromise2.default.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(clock).promise();
       (0, _netbeast2.default)('lights').set({ power: 0 });
       (0, _netbeast2.default)('switch').set({ power: false });
       (0, _netbeast2.default)('video').set({ status: 'stop' });
@@ -93,6 +99,8 @@ var Picker = function (_React$Component) {
       }, 8000);
 
       timer2 = setTimeout(function () {
+        var tea = { power: 'on', data: [[1, 0, 1, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 0, 0], [1, 0, 0, 0, 0, 1, 1, 0], [1, 0, 0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 1, 1, 0], [1, 1, 1, 1, 1, 1, 0, 0]] };
+        _superagentBluebirdPromise2.default.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tea).promise();
         (0, _netbeast2.default)('video').set({ track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 100 });
       }, 13000);
 
@@ -101,6 +109,8 @@ var Picker = function (_React$Component) {
         (0, _netbeast2.default)('lights').set({ color: { r: 252, g: 252, b: 255 } });
         timer4 = setTimeout(function () {
           (0, _netbeast2.default)('lights').set({ color: { r: 255, g: 255, b: 255 } });
+          var message = { power: 'on', data: [[1, 1, 1, 1, 1, 1, 1, 1], [1, 0, 0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 1], [1, 0, 1, 0, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 1, 1, 1, 1, 1], [0, 0, 1, 0, 0, 0, 0, 0]] };
+          _superagentBluebirdPromise2.default.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(message).promise();
         }, 2000);
       }, 25000);
 
@@ -109,11 +119,33 @@ var Picker = function (_React$Component) {
         (0, _netbeast2.default)('switch').set({ power: false });
         (0, _netbeast2.default)('music').set({ status: 'stop' });
         (0, _netbeast2.default)('video').set({ status: 'stop' });
+        var smile = { power: 'on', data: [[0, 0, 1, 1, 1, 1, 0, 0], [0, 1, 0, 0, 0, 0, 1, 0], [1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 0, 0, 1], [1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 0, 1, 1, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1, 0], [0, 0, 1, 1, 1, 1, 0, 0]] };
+
+        _superagentBluebirdPromise2.default.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(smile).promise();
       }, 80000);
     }
   }, {
     key: 'handleFilm',
-    value: function handleFilm() {}
+    value: function handleFilm() {
+      this.closeTimers();
+      (0, _netbeast2.default)('music').set({ status: 'stop' });
+      var tv = { power: 'on', data: [[0, 0, 1, 0, 0, 1, 0, 0], [0, 0, 1, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1, 1, 0], [0, 1, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 0, 1, 0], [0, 1, 1, 1, 1, 1, 1, 0]] };
+
+      _superagentBluebirdPromise2.default.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tv).promise();
+      (0, _netbeast2.default)('lights').set({ power: 1, color: { r: 255, g: 255, b: 255 } });
+      (0, _netbeast2.default)('switch').set({ power: false });
+      (0, _netbeast2.default)('video').set({ status: 'stop' });
+
+      timer1 = setTimeout(function () {
+        var i = 0;
+        timerLights = setInterval(function () {
+          if (i >= 0 && i <= 25) {
+            (0, _netbeast2.default)('lights').set({ power: true, color: { r: 255 - 10 * i, g: 255 - 10 * i, b: 255 - 10 * i } });
+            i++;
+          } else clearInterval(timerLights);
+        }, 500);
+      }, 8000);
+    }
   }, {
     key: 'handleParty',
     value: function handleParty() {}
@@ -161,7 +193,7 @@ exports.default = Picker;
 
 }).call(this,require('_process'))
 
-},{"_process":14,"netbeast":38,"react":268}],3:[function(require,module,exports){
+},{"_process":14,"netbeast":38,"react":268,"superagent-bluebird-promise":269}],3:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)

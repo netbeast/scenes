@@ -1,4 +1,5 @@
 import React from 'react'
+import request from 'superagent-bluebird-promise'
 process.env.NETBEAST = '192.168.0.14:8000'
 import netbeast from 'netbeast'
 
@@ -14,7 +15,17 @@ export default class Picker extends React.Component {
 
   handleMorning () {
     this.closeTimers()
+    var clock = {power: 'on', data: [
+      [0, 0, 1, 1, 1, 1, 0, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [1, 0, 0, 1, 0, 0, 0, 1],
+      [1, 0, 0, 1, 0, 0, 0, 1],
+      [1, 0, 0, 1, 1, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 1],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 0, 1, 1, 1, 1, 0, 0]]}
     netbeast('music').set({status: 'stop'})
+    request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(clock).promise()
     netbeast('lights').set({power: 0})
     netbeast('switch').set({power: false})
     netbeast('video').set({status: 'stop'})
@@ -40,13 +51,35 @@ export default class Picker extends React.Component {
     }, 8000)
 
     timer2 = setTimeout(function () {
+      var tea = {power: 'on', data: [
+        [1, 0, 1, 0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 1, 1, 0],
+        [1, 0, 0, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 0, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 0, 0]]}
+      request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tea).promise()
       netbeast('video').set({track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 100})
     }, 13000)
 
     timer3 = setTimeout(function () {
       netbeast().info('Your plant needs water ', 'Flower Power')
       netbeast('lights').set({color: { r: 252, g: 252, b: 255 }})
-      timer4 = setTimeout(function () { netbeast('lights').set({color: { r: 255, g: 255, b: 255 }}) }, 2000)
+      timer4 = setTimeout(function () {
+        netbeast('lights').set({color: { r: 255, g: 255, b: 255 }})
+        var message = {power: 'on', data: [
+          [1, 1, 1, 1, 1, 1, 1, 1],
+          [1, 0, 0, 0, 0, 0, 0, 1],
+          [1, 0, 0, 0, 0, 0, 0, 1],
+          [1, 0, 1, 0, 1, 0, 1, 1],
+          [1, 0, 0, 0, 0, 0, 0, 1],
+          [1, 0, 0, 0, 0, 0, 0, 1],
+          [0, 1, 0, 1, 1, 1, 1, 1],
+          [0, 0, 1, 0, 0, 0, 0, 0]]}
+        request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(message).promise()
+      }, 2000)
     }, 25000)
 
     timer5 = setTimeout(function () {
@@ -54,10 +87,48 @@ export default class Picker extends React.Component {
       netbeast('switch').set({power: false})
       netbeast('music').set({status: 'stop'})
       netbeast('video').set({status: 'stop'})
+      var smile = {power: 'on', data: [
+        [0, 0, 1, 1, 1, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 0, 1, 0, 1],
+        [1, 0, 0, 1, 1, 0, 0, 1],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 0, 1, 1, 1, 1, 0, 0]]}
+
+      request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(smile).promise()
     }, 80000)
   }
 
   handleFilm () {
+    this.closeTimers()
+    netbeast('music').set({status: 'stop'})
+    var tv = {power: 'on', data: [
+      [0, 0, 1, 0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 1, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 1, 1, 1, 1, 1, 1, 0]]}
+
+    request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tv).promise()
+    netbeast('lights').set({power: 1, color: { r: 255, g: 255, b: 255 }})
+    netbeast('switch').set({power: false})
+    netbeast('video').set({status: 'stop'})
+
+    timer1 = setTimeout(function () {
+      var i = 0
+      timerLights = setInterval(function () {
+        if (i >= 0 && i <= 25) {
+          netbeast('lights').set({power: true, color: {r: 255 - 10 * i, g: 255 - 10 * i, b: 255 - 10 * i}})
+          i++
+        } else clearInterval(timerLights)
+      }, 500)
+    }, 8000)
+
   }
 
   handleParty () {
