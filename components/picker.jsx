@@ -25,8 +25,8 @@ export default class Picker extends React.Component {
 
   renderMorning () {
     return (
-      <div className='morning'>
-        <img src='media/Alarm-Clock.jpg.jpg' width='100%' height='450px' alt='morning-photo' />
+      <div className='morning text-center'>
+        <img src='media/Alarm-Clock.jpg.jpg' width='auto' height='450px' alt='morning-photo' />
       </div>
     )
   }
@@ -35,7 +35,8 @@ export default class Picker extends React.Component {
     return (
       <div className='saving text-center'>
         <br/><br/><br/><br/><br/>
-        <h1 style={{ color: 'white' }}>Energy saving mode: <br/> ON</h1>
+        <h1 style={{ color: 'white' }}>Energy saving mode ON.</h1>
+        <img src='media/saving.png' width='auto' height='150px' alt='morning-photo' />
       </div>
     )
   }

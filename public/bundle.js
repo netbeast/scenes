@@ -78,8 +78,8 @@ var Picker = function (_React$Component) {
     value: function renderMorning() {
       return _react2.default.createElement(
         'div',
-        { className: 'morning' },
-        _react2.default.createElement('img', { src: 'media/Alarm-Clock.jpg.jpg', width: '100%', height: '450px', alt: 'morning-photo' })
+        { className: 'morning text-center' },
+        _react2.default.createElement('img', { src: 'media/Alarm-Clock.jpg.jpg', width: 'auto', height: '450px', alt: 'morning-photo' })
       );
     }
   }, {
@@ -96,10 +96,9 @@ var Picker = function (_React$Component) {
         _react2.default.createElement(
           'h1',
           { style: { color: 'white' } },
-          'Energy saving mode: ',
-          _react2.default.createElement('br', null),
-          ' ON'
-        )
+          'Energy saving mode ON.'
+        ),
+        _react2.default.createElement('img', { src: 'media/saving.png', width: 'auto', height: '150px', alt: 'morning-photo' })
       );
     }
   }, {

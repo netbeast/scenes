@@ -3,17 +3,17 @@
   font-family: 'Fira Sans';
   font-style: normal;
   font-weight: normal;
-  src: local("Fira Sans"), url("../fonts/fira-sans/FiraSans-Regular.ttf") format("truetype"); }
+  src: local("Fira Sans"), url("http://localhost:8000/i/scenes/fonts/fira-sans/FiraSans-Regular.ttf") format("truetype"); }
 @font-face {
   font-family: 'Fira Sans';
   font-style: italic;
   font-weight: normal;
-  src: local("Fira Sans"), url("../fonts/fira-sans/FiraSans-Italic.ttf") format("truetype"); }
+  src: local("Fira Sans"), url("http://localhost:8000/i/scenes/fonts/fira-sans/FiraSans-Italic.ttf") format("truetype"); }
 @font-face {
   font-family: 'Proxima Nova';
   font-style: normal;
   font-weight: bold;
-  src: local("Proxima Nova"), url("../fonts/proxima-nova/ProximaNova-Bold.otf") format("opentype"); }
+  src: local("Proxima Nova"), url("http://localhost:8000/i/scenes/fonts/proxima-nova/ProximaNova-Bold.otf") format("opentype"); }
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
