@@ -14,6 +14,8 @@ var timer5
 export default class Picker extends React.Component {
 
   handleMorning () {
+    var audio = new Audio('../media/alarm.mp3')
+    audio.play()
     this.closeTimers()
     var clock = {power: 'on', data: [
       [0, 0, 1, 1, 1, 1, 0, 0],
@@ -101,39 +103,6 @@ export default class Picker extends React.Component {
     }, 80000)
   }
 
-  handleFilm () {
-    this.closeTimers()
-    netbeast('music').set({status: 'stop'})
-    var tv = {power: 'on', data: [
-      [0, 0, 1, 0, 0, 1, 0, 0],
-      [0, 0, 1, 0, 1, 0, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 0],
-      [0, 1, 1, 1, 1, 1, 1, 0],
-      [0, 1, 0, 0, 0, 0, 1, 0],
-      [0, 1, 0, 0, 0, 0, 1, 0],
-      [0, 1, 0, 0, 0, 0, 1, 0],
-      [0, 1, 1, 1, 1, 1, 1, 0]]}
-
-    request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tv).promise()
-    netbeast('lights').set({power: 1, color: { r: 255, g: 255, b: 255 }})
-    netbeast('switch').set({power: false})
-    netbeast('video').set({status: 'stop'})
-
-    timer1 = setTimeout(function () {
-      var i = 0
-      timerLights = setInterval(function () {
-        if (i >= 0 && i <= 25) {
-          netbeast('lights').set({power: true, color: {r: 255 - 10 * i, g: 255 - 10 * i, b: 255 - 10 * i}})
-          i++
-        } else clearInterval(timerLights)
-      }, 500)
-    }, 8000)
-
-  }
-
-  handleParty () {
-  }
-
   closeTimers () {
     console.log(timerMusic)
     if (timerMusic) clearInterval(timerMusic)
@@ -148,9 +117,8 @@ export default class Picker extends React.Component {
   render () {
     return (
       <div>
+        <img className='clock' src='img/alarm.jpg'/>
         <button onClick={ this.handleMorning.bind(this) }>Good Morning</button>
-        <button onClick={ this.handleFilm.bind(this) }>Watching a Film</button>
-        <button onClick={ this.handleParty.bind(this) }>Party</button>
       </div>
     )
   }
