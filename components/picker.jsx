@@ -36,7 +36,7 @@ export default class Picker extends React.Component {
     var j = 0
     timerMusic = setInterval(function () {
       if (j >= 0 && j <= 10) {
-        netbeast('music').set({volume: 10 + j * 1})
+        netbeast('music').set({volume: 10 + j * 3})
         j++
       } else clearInterval(timerMusic)
     }, 1000)
@@ -104,7 +104,6 @@ export default class Picker extends React.Component {
   }
 
   closeTimers () {
-    console.log(timerMusic)
     if (timerMusic) clearInterval(timerMusic)
     if (timerLights) clearInterval(timerLights)
     if (timer1) clearTimeout(timer1)
