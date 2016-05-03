@@ -28,10 +28,10 @@ export default class Picker extends React.Component {
       [0, 0, 1, 1, 1, 1, 0, 0]]}
     netbeast('music').set({status: 'stop'})
     request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(clock).promise()
-    netbeast('lights').set({power: 0})
+    netbeast('lights').set({power: 0, color: {r: 0, g: 0, b: 0}})
     netbeast('switch').set({power: false})
     netbeast('video').set({status: 'stop'})
-    netbeast('music').set({track: 'http://192.168.0.14:8000/i/scenes/media/morningsong.mp3', volume: 10})
+    netbeast('music').set({track: 'http://192.168.0.16:8000/i/scenes/media/morningsong.mp3', volume: 10})
 
     var j = 0
     timerMusic = setInterval(function () {
@@ -42,10 +42,11 @@ export default class Picker extends React.Component {
     }, 1000)
 
     timer1 = setTimeout(function () {
-      var i = 0
+      var i = 1
+      netbeast('lights').set({power: true, brightness: 1})
       timerLights = setInterval(function () {
-        if (i >= 0 && i <= 25) {
-          netbeast('lights').set({power: true, color: {r: 10 * i, g: 10 * i, b: 10 * i}})
+        if (i >= 1 && i <= 25) {
+          netbeast('lights').set({power: true, brightness: 4 * i})
           i++
         } else clearInterval(timerLights)
       }, 400)
@@ -63,7 +64,7 @@ export default class Picker extends React.Component {
         [1, 0, 0, 0, 0, 1, 1, 0],
         [1, 1, 1, 1, 1, 1, 0, 0]]}
       request.post('http://192.168.0.1/i/led-panel-plugin/ledPanel/1').send(tea).promise()
-      netbeast('video').set({track: 'http://192.168.0.14:8000/i/scenes/media/forecast.mp4', volume: 100})
+      netbeast('video').set({track: 'http://192.168.0.16:8000/i/scenes/media/forecast.mp4', volume: 100})
     }, 13000)
 
     timer3 = setTimeout(function () {
